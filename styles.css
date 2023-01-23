@@ -1,0 +1,26 @@
+*{
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: orange;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 100vw;
+    height:100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.box {
+    width: 40vw;
+    height:40vh;
+    background-color: white;
+    border-radius: 10px;
+}
