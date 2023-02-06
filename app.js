@@ -8,16 +8,41 @@ const media = document.querySelector("#media");
 
 
 
-form.addEventListener("submit", function() {
+const a = 1000; //aporte inicial
+const b = 1+(10/100); //rentabilidade media
+const c = 5; // tempo 
+ 
+
+
+form.addEventListener("submit", async function() {
     event.preventDefault();
-    const resul = calculadora(aporteInicial.value, aporteMensal.value, media.value, anos.value);
-    console.log(resul);
-    const r = "R$" + resul.toLocaleString('pt-BR');
-    console.log(r);
-    span.textContent = `${r}`;
+    const url = pegaURL();
+    getAllPosts(url);
+
+    
 });
 
-function calculadora(a, b, c, d) {
+async function getAllPosts(url) {
+    const response = await fetch(url);
+    const data = await response.json()
+    console.log(data);
+    const r = "R$" + data.toLocaleString('pt-BR');
+    console.log(r);
+    span.textContent = `${r}`;
+}
+
+function pegaURL() {
+    if (aporteInicial.value && media.value && anos.value) {
+        const rent = ((1) + (media.value/100));
+        console.log(rent, 'aqui');
+        return `http://api.mathjs.org/v4/?expr=${aporteInicial.value}*${rent}%5E${anos.value}`
+    } else {
+        console.log('Deu errado');
+    }
+}
+
+//função que calcula o valor do investimento
+/* function calculadora(a, b, c, d) {
         a = parseFloat(a);
         b = parseFloat(b);
         c = parseFloat(c);
@@ -36,10 +61,10 @@ function calculadora(a, b, c, d) {
         // rentabilidade do capital inicial
         a = (a+b)*(c**(d))  
         console.log(a);
-        } else {
+        } else { */
             /* a = (a)*(c**(d))  */
 
-            for (var i = 0; i < d; i++) {
+            /* for (var i = 0; i < d; i++) {
                 console.log(`${i} vez`);
                 a = a + (b*c**(i+1))
                 console.log(a);
@@ -50,4 +75,4 @@ function calculadora(a, b, c, d) {
         
         let valor = a
         return valor;
-}
+} */
